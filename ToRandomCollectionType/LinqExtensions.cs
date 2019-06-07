@@ -7,7 +7,9 @@ namespace Nerdhold
 {
     public static class LinqExtensions
     {
-        private static readonly Random Rnd = new Random();
+        [ThreadStatic]
+        private static Random _threadRnd;
+        private static Random Rnd => _threadRnd ?? (_threadRnd = new Random());
 
         /// <summary>
         /// Ensures the collection count matches, but will cause multiple enumerations. Choose your risk wisely!
