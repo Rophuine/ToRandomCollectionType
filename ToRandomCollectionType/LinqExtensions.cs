@@ -28,7 +28,9 @@ namespace Nerdhold
                         && t.GetGenericArguments().Length == 1
                         && t.IsGenericTypeDefinition
                     )
-                    .Select(t => { try { return t.MakeGenericType(typeof(T)); } catch { return null; } })
+                    .Select(t => { try
+                    {
+                        t.GetConstructor(constructorParamTypeArray); return t.MakeGenericType(typeof(T)); } catch { return null; } })
                     .Where(t => t != null && t.GetConstructor(constructorParamTypeArray) != null)
             ).ToList();
             var type = types[Rnd.Next(0, types.Count - 1)];

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>ToRandomCollectionType</id>
+    <version>0.2</version>
+    <title>ToRandomCollectionType</title>
+    <authors>Lionell Pack</authors>
+    <owners>Lionell Pack</owners>
+    <projectUrl>https://github.com/Rophuine/ToRandomCollectionType</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Tired of choosing between .ToList() and .ToArray()? Save yourself some thinking and use .ToRandomCollectionType() instead!</description>
+    <releaseNotes>Release version</releaseNotes>
+    <copyright>Copyright 2019 Lionell Pack</copyright>
+    <tags>humour linq</tags>
+  </metadata>
+</package>
