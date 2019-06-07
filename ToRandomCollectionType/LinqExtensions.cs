@@ -28,15 +28,14 @@ namespace Nerdhold
                         && t.GetGenericArguments().Length == 1
                         && t.IsGenericTypeDefinition
                     )
-                    .Select(t => { try
-                    {
-                        t.GetConstructor(constructorParamTypeArray); return t.MakeGenericType(typeof(T)); } catch { return null; } })
-                    .Where(t => t != null && t.GetConstructor(constructorParamTypeArray) != null)
+                    .Select(t => { try {
+                        var genType = t.MakeGenericType(typeof(T));
+                        return new { Constructor = genType.GetConstructor(constructorParamTypeArray), GenType = genType};
+                    } catch { return null; } })
+                    .Where(t => t?.Constructor != null)
             ).ToList();
             var type = types[Rnd.Next(0, types.Count - 1)];
-            var constructor = type.GetConstructor(constructorParamTypeArray);
-            if (constructor == null) throw new Exception("Panic: Couldn't find a useful constructor.");
-            var result = (IEnumerable<T>)constructor.Invoke(new object[] { collection });
+            var result = (IEnumerable<T>)type.Constructor.Invoke(new object[] { collection });
             if (EnsureRandomCollectionCountMatches && result.Count() != collection.Count()) return collection.ToRandomCollectionType();
             return result;
         }
